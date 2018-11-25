@@ -32,7 +32,8 @@ router.post("/register", function(req, res){
 // LOGIN ROUTES
 // show user login form
 router.get("/login", function(req, res){
-  res.render("login");
+  // show login and passing value of flash error
+  res.render("login", {message: req.flash("error")});
 });
 // handle user login logic from login form
 // PATTERN --->  app.post("/login", middleware, callback)

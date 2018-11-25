@@ -2,16 +2,12 @@ var express         = require("express"),
     app             = express(),
     bodyParser      = require("body-parser"),
     mongoose        = require("mongoose"),
+    flash           = require("connect-flash"),
     passport        = require("passport"),
     localStrategy   = require("passport-local"),
     methodOverride  = require("method-override"),
-    // // Use campground schema from /models/campground.js file 
-    // Campground      = require("./models/campground"),
-    // // Use comment schema from /models/comment.js file
-    // Comment         = require("./models/comment"),
     User            = require("./models/user");
-    // Will clear every data and create new data from DB. (error driven code)
-    // seedDB          = require("./seeds");
+    seedDB          = require("./seeds");
 
 // REQUIRING ROUTES 
 var campgroundRoutes  = require("./routes/campgrounds"),
@@ -36,6 +32,8 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 // tell app to use _method
 app.use(methodOverride("_method"));
+// use flash
+app.use(flash());
 
 // remove and create new data from db
 // seedDB();

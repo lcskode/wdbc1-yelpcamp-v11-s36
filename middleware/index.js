@@ -61,7 +61,11 @@ middlewareObj.isLoggedIn = function(req, res, next){
     // if authenticated, continue showing pages
     return next();
   }
-  // if not authenticated, show login page, 
+  // if not authenticated,
+  // create flash message before redirecting to /login
+  req.flash("error", "Please login first!");
+
+  // show login page, 
   res.redirect("/login");
 }
 

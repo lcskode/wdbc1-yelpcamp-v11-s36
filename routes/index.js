@@ -33,7 +33,7 @@ router.post("/register", function(req, res){
 // show user login form
 router.get("/login", function(req, res){
   // show login and passing value of flash error
-  res.render("login", {message: req.flash("error")});
+  res.render("login");
 });
 // handle user login logic from login form
 // PATTERN --->  app.post("/login", middleware, callback)
@@ -47,6 +47,7 @@ router.post("/login", passport.authenticate("local", {
 // LOGOUT ROUTE
 router.get("/logout", function(req, res){
   req.logout();
+  req.flash("success", "You are logged out!");
   res.redirect("/campgrounds");
 });
 

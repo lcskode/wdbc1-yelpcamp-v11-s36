@@ -28,3 +28,24 @@
     </div>
   </nav>
 
+  <!-- Added flash message -->
+  <div class="container">
+    <!-- 
+      error and success are ARRAYS, 
+      array even UNDEFINED still has an evaluation of TRUTHY 
+    -->
+    <!-- flash message if error array has value and length greater than 0 -->
+    <% if(error.length > 0){ %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <% } %>
+    <!-- flash message if success array has value and length greater than 0 -->
+    <% if(success.length > 0){ %>
+      <div class="alert alert-success" role="alert">
+        <%= success %>
+      </div>
+    <% } %>
+    
+    
+  </div>

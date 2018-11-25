@@ -61,10 +61,14 @@ passport.serializeUser(User.serializeUser());
 // reading session and un-encoding it
 passport.deserializeUser(User.deserializeUser());
 
-// middleware, pass req.user to each and every route, this will be called to every route
-// this will check if there is currentUser login or none
+// middleware, pass req.user to each and every route, this will be called to every route or page
+
 app.use(function(req, res, next){
+  // this will check if there is currentUser login or none
   res.locals.currentUser = req.user;
+  // send flash message if there is an important event
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
   next();
 });
 

@@ -1,7 +1,10 @@
-#### S35-L308 YelpCamp V11  
-**Adding Flash@**  
-* Install and configure connect-flash  
+#### S35-L310 YelpCamp V11.1  
+**Adding Flash**  
 * Add bootstrap alerts to header  
+
+#### S35-L308 YelpCamp V11  
+**Adding Flash**  
+* Install and configure connect-flash  
 
 #### S35-L307 YelpCamp V10.4  
 * Refactor Middleware  

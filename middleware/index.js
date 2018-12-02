@@ -12,6 +12,7 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next){
     // find campground by ID
     Campground.findById(req.params.id, function(err, foundCampground){
       if(err){
+        req.flash("error", "Campground not found.");
         res.redirect("back");
       } else {        
         // does user own the campground?
@@ -21,12 +22,15 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next){
           next();
         } else {
           // if not own campground, redirect
+          req.flash("error", "You don't have permission to do that.");
           res.redirect("back");
         }
       } 
     });
   } else {
-    // if not logged in, redirect
+    // if not logged in, pop up flash msg
+    req.flash("error", "You need to be logged in to do that.");
+    //then, redirect
     res.redirect("back");
   }
 }
@@ -46,13 +50,20 @@ middlewareObj.checkCommentOwnership = function(req, res, next){
           next();
         } else {
           // if not own comment, redirect
+          req.flash("error", "You don't have permission to do that.");
           res.redirect("back");
         }
       } 
     });
   } else {
-    // if user not logged in, redirect
+
+    // if not logged in, pop up flash msg
+    req.flash("error", "You need to be logged in to do that.");
+    //then, redirect
     res.redirect("back");
+
+    // if user not logged in, redirect
+    // res.redirect("back");
   }
 }
 
@@ -63,7 +74,7 @@ middlewareObj.isLoggedIn = function(req, res, next){
   }
   // if not authenticated,
   // create flash message before redirecting to /login
-  req.flash("error", "Please login first!");
+  req.flash("error", "You need to be logged in first to do that.");
 
   // show login page, 
   res.redirect("/login");

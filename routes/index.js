@@ -19,11 +19,14 @@ router.post("/register", function(req, res){
   var newUser = new User({username: req.body.username});
   User.register(newUser, req.body.password, function(err, user){
     if(err){
-      console.log(err);
-      return res.render("register");
+      //  
+      // console.log(err);
+      req.flash("error", err.message);
+      return res.redirect("/register");
     }
     // no need for else statement because return is used
     passport.authenticate("local")(req, res, function(){
+      req.flash("success", "Welcome to YelpCamp " + user.username);
       res.redirect("/campgrounds");
     });
   });
@@ -50,16 +53,5 @@ router.get("/logout", function(req, res){
   req.flash("success", "You are logged out!");
   res.redirect("/campgrounds");
 });
-
-// MIDDLEWARE
-// add isLoggedIn middleware 
-function isLoggedIn(req, res, next){
-  if(req.isAuthenticated()){
-    // if authenticated, continue showing pages
-    return next();
-  }
-  // if not authenticated, show login page, 
-  res.redirect("/login");
-}
 
 module.exports = router;
